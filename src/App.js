@@ -46,6 +46,26 @@ function App() {
             });
     }, []);
 
+    const getLocation = () => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setCurrentLocation({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                });
+            },
+            (error) => {
+                console.log(error);
+                setTimeout(() => getLocation(), 3000); // 3초 후에 다시 위치 정보 요청
+            }
+        );
+    };
+
+    useEffect(() => {
+        getLocation();
+    }, []);
+
+
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
