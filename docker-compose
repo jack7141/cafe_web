@@ -1,8 +1,0 @@
-version: '3.8'
-
-services:
-  react:
-    build: .
-    image: react-app
-    ports:
-      - "80:80"
