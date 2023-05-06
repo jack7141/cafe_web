@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardMedia, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import './CafeCard.css';
+import './components/CafeCard.css';
 
 const AnimatedCard = styled(Card)({
     transition: 'transform 0.3s ease-in-out',
@@ -19,6 +19,12 @@ const FlipCardBack = styled(Card)({
     backfaceVisibility: 'hidden',
     transform: 'rotateY(180deg)',
 });
+const truncateString = (str, num) => {
+    if (str.length <= num) {
+        return str;
+    }
+    return str.slice(0, num) + "...";
+};
 
 function NearCafeCard({ name, address, roadAddress, latitude, longitude, tel, homePage, businessHoursStart, businessHoursEnd, thumbnails, distance }) {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -28,13 +34,18 @@ function NearCafeCard({ name, address, roadAddress, latitude, longitude, tel, ho
     };
     const thumbnailUrl = (thumbnails) => {
         if (!thumbnails || thumbnails.length === 0) {
-            return "https://your-image-url.jpg"; // 대체 이미지 URL
+            return "/404.png";
         }
         return thumbnails[0].url;
     }
 
     return (
-        <AnimatedCard className={`flip-container ${isFlipped ? 'flipped' : ''}`} onClick={handleClick}>
+        <AnimatedCard
+            className={`flip-container ${isFlipped ? 'flipped' : ''}`}
+            onClick={handleClick}
+            sx={{ maxWidth: 400 }}
+            sx={{ maxHeight: 400 }}
+        >
             <div className="flipper">
                 <CardMedia
                     component="img"
@@ -43,21 +54,16 @@ function NearCafeCard({ name, address, roadAddress, latitude, longitude, tel, ho
                     image={thumbnailUrl(thumbnails)}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {name}
+                    <Typography gutterBottom variant="h8" component="div">
+                        {truncateString(name, 10)} {/* 이름을 25자로 제한합니다. */}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        🏠 {address}<br />
-                        🛣️ {roadAddress}<br />
-                        📍 {latitude}, {longitude}<br />
-                        📞 {tel}<br />
-                        ⏰ {businessHoursStart} - {businessHoursEnd}<br />
                         🏃‍♀{distance}M<br />
                     </Typography>
                 </CardContent>
                 <FlipCardBack>
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom variant="h8" component="div">
                             {name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
