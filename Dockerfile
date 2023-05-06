@@ -1,23 +1,17 @@
-# Node.js를 기반으로 하는 기본 이미지 선택
+# Choose a base image based on Node.js
 FROM node:14
 
-# 작업 디렉토리 설정
+# Set the working directory
 WORKDIR /app
 
-# package.json 파일 복사
+# Copy package.json file
 COPY package*.json ./
 
-# 의존성 설치
+# install dependencies
 RUN npm install
 
-# 소스 코드 복사
-COPY .. .
+# copy the source code
+COPY . .
 
-# 애플리케이션을 빌드
+# Build the application
 RUN npm run build
-
-# Nginx 웹 서버 이미지를 기반으로 생성
-FROM nginx:1.21
-
-# 빌드된 React 애플리케이션을 Nginx로 복사
-COPY --from=0 /app/build /usr/share/nginx/html
