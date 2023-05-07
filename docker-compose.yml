@@ -9,5 +9,3 @@ services:
       internal:
     ports:
       - "80:80"
-    external_links:
-      - "cafe_server-django:cafe_server-django"
