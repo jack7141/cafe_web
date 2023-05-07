@@ -5,7 +5,7 @@ const useCafeData = (currentLocation) => {
     const [nearbyCafeData, setNearbyCafeData] = useState([]);
 
     useEffect(() => {
-        fetch('http://172.22.0.1:8001/api/v1/cafe/')
+        fetch('http://cafe_server-django:8001/api/v1/cafe/')
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch cafe data');
