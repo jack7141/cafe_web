@@ -4,8 +4,5 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: cafe-web
-    networks:
-      public:
-      internal:
     ports:
       - "80:80"
