@@ -5,7 +5,7 @@ const useCafeData = (currentLocation) => {
     const [nearbyCafeData, setNearbyCafeData] = useState([]);
 
     useEffect(() => {
-        fetch('/api/v1/cafe/')
+        fetch('http://localhost:8001/api/v1/cafe/')
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Failed to fetch cafe data');
@@ -26,7 +26,7 @@ const useCafeData = (currentLocation) => {
 
     useEffect(() => {
         if (currentLocation) {
-            fetch('/api/v1/cafe/nearby/', {
+            fetch('http://localhost:8001/api/v1/cafe/nearby/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
