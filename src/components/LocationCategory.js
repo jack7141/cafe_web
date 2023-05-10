@@ -78,7 +78,7 @@ const CategoryList = () => {
     }, []);
 
     return (
-        <Box py={3} minHeight="80vh">
+        <Box py={3}>
             <Grid container spacing={2} sx={{ padding: { xs: '5%', sm: '10%', md: '20%', lg: '30%' } }}>
         <div>
             {chunks.map((chunk, index) => (
