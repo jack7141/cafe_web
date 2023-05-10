@@ -27,7 +27,7 @@ const HotCafeList = ({ cafeData }) => {
                         </Grid>
                     ))}
                 </Grid>
-        </Box>
+            </Box>
         </>
     );
 };
